@@ -35,8 +35,9 @@ For the setup to survive upgrades / deletion of the containers i mount different
 
 
 start by creating a network for the analysis platform    
+```
 docker network create elastic  
-  
+```
 
 ## 1: Folders in this repo  
   
