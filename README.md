@@ -6,8 +6,13 @@ This repository contains information and configuration for building your own hom
 Analytics that can run 24/7 without requiring much disk space or processing power.  
 Usually we only ad-Hoc / spot check logs or connections,  
 missing out on equipment that "calls home" once every 4/8/48 Hours.  
-Gaining this information has proven valuable.  
+Gaining this information has proven valuable insights on how devices share our privacy without you knowing.   
+  
 I wrote about this topic on my website <https://www.thorsrud.io/breaking-down-information-silos-building-a-home-network-intelligence-platform/>
+
+  
+I have worked with IT Security as a professional for 26 years, working for both private and public customers bulding global services for several fortune 500 companies.  
+What drives me today and has always driven me is curiosity: What if, How come.. 
   
 I will share configuration on how to get insights into  
  - What your TV does on the internet when you use it and when you sleep.  
