@@ -13,9 +13,9 @@ Or showing where in the world the people your kids talk to on Discord are actual
 
 I will also share how i enrich the data with  
   
-**Geo Location Information** 
-**Threat information** (From virus total and other services)  
-   
+- Geo Location Information   
+- Threat information (From virus total and other services)  
+  
 Giving you the abillity to discover if your internet connected washing machine is part of a DDOS network or a surveilance device  
   
 
