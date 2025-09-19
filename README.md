@@ -5,8 +5,12 @@
 This repository contains information and configuration for building your own home network Analytics platform  
 that can run 24/7 without requiring much disk space or processing power.  
   
-I will share configuration on how to build a full world map showing what your TV does on the internet when you sleep.  
+I will share configuration on how to build a full world map  
+showing what your TV does on the internet when you sleep.  
+  
+
 Or showing where in the world the people your kids talk to on Discord are actually located.  
+  
 I will also share how i enrich the data with threat information from virus total  
 Giving you the abillity to discover if your internet connected washing machine is part of a DDOS network or a surveilance device  
   
