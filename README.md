@@ -54,3 +54,32 @@ The logstash collector is also responsible for enriching the data with Geo IP In
 
 
 ## 2: Prepare Elastic Search  
+  
+Start a terminal window and go to the $ELK$/ folder.  
+We will start elasticsearch just to be able to set a password on the systemuser elastic.  
+
+```
+docker run -d \
+  --name elasticsearch \
+  --net elastic \
+  -p 9200:9200 -p 9300:9300 \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=true" \
+  -e "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
+  docker.elastic.co/elasticsearch/elasticsearch:9.1.3
+```
+  
+Docker will download elasticsearch and start up an instance of Elastic Search in a container named elasticsearch running on network elastic  
+Give it some time to boot up before we reset the admin password.  
+  
+Reset Password using
+```
+docker run -d \
+-docker exec -it elasticsearch bin/elasticsearch-reset-password -u elastic --interactive 
+```
+
+Note down the password and try to query Elastic Search using the password.
+
+```
+curl -u elastic:<YOUR_PW> "localhost:9200/_cluster/health"
+```
