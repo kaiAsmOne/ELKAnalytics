@@ -91,4 +91,31 @@ Expect an output similar to this
 ```
 {"cluster_name":"docker-cluster","status":"green","timed_out":false,"number_of_nodes":1,"number_of_data_nodes":1,"active_primary_shards":70,"active_shards":70,"relocating_shards":0,"initializing_shards":0,"unassigned_shards":11,"unassigned_primary_shards":0,"delayed_unassigned_shards":0,"number_of_pending_tasks":0,"number_of_in_flight_fetch":0,"task_max_waiting_in_queue_millis":0,"active_shards_percent_as_number":86.41975308641975}%
 ```  
+  
+Create a backup folder  
+mkdir $ELKH/elasticbackup/  
+  
+Restart Elasticsearch with password  
+Run Elasticsearch with 1GB Ram ( "ES_JAVA_OPTS=-Xms1g -Xmx1g" )  
+
+```
+docker stop elasticsearch
+docker rm elasticsearch
+
+docker run -d \
+  --name elasticsearch \
+  --net elastic \
+  -p 9200:9200 -p 9300:9300 \
+  -v "<Insert your $ELK$ Path>/elasticsearch-data:/usr/share/elasticsearch/data" \
+  -v "<Insert your $ELK$ Path>/elasticbackup:/usr/share/elasticsearch/backup" \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=true" \
+  -e "ELASTIC_PASSWORD=<YOUR_PW>" \
+  -e "path.repo=/usr/share/elasticsearch/backup" \
+  -e "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
+  docker.elastic.co/elasticsearch/elasticsearch:9.1.3
+  
+### Verify Cluster Health with auth
+curl -u elastic:<YOUR_PW> "localhost:9200/_cluster/health"  
+ ```
 
