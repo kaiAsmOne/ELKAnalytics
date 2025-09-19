@@ -2,9 +2,10 @@
 
 **About This Project**  
 
-This repository contains information and configuration for building your own home network Analytics platform  
-Analytics that can run 24/7 without requiring much disk space or processing power. Usually we only ad-Hoc / spot check logs or connections.  
-Missing out on equipment that "calls home" once every 4/8/48 Hours. Gaining this information has proven valuable.  
+This repository contains information and configuration for building your own home network Analytics platform.  
+Analytics that can run 24/7 without requiring much disk space or processing power.  
+Usually we only ad-Hoc / spot check logs or connections, missing out on equipment that "calls home" once every 4/8/48 Hours.  
+Gaining this information has proven valuable.  
   
 I will share configuration on how to get insights into  
  - What your TV does on the internet when you use it and when you sleep.  
