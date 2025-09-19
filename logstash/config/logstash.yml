@@ -1,0 +1,21 @@
+# Network settings
+api.http.host: "0.0.0.0"
+api.http.port: 9600
+
+# Monitoring settings 
+xpack.monitoring.enabled: true 
+xpack.monitoring.elasticsearch.hosts: ["http://elasticsearch:9200"]
+#xpack.monitoring.elasticsearch.ssl.certificate_authority: "/usr/share/logstash/config/certs/ca/ca.crt"
+#xpack.monitoring.elasticsearch.ssl.verification_mode: none
+
+#monitoring.elasticsearch.api_key: ""<INSERT_YOUR_TOKEN>""
+
+
+# Pipeline settings
+pipeline.workers: 2
+pipeline.batch.size: 125
+pipeline.batch.delay: 50
+
+# Logging
+log.level: info
+path.logs: /usr/share/logstash/logs

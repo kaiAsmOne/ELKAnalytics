@@ -1,0 +1,7 @@
+# ignore all Mac system files
+*.DS_Store
+# ignore all certs
+*.pem
+*.key
+*.cer
+*.pfx

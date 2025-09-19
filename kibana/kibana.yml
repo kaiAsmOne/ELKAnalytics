@@ -1,0 +1,20 @@
+# Default Kibana configuration for docker target
+server.host: "0.0.0.0"
+server.port: 5601
+server.shutdownTimeout: "5s"
+elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+elasticsearch.serviceAccountToken: "<INSERT_YOUR_TOKEN>"
+monitoring.ui.container.elasticsearch.enabled: true
+# Reading doc manually 
+# Assume this is for the trust part of kibana connecting to elastic search
+#elasticsearch.ssl.certificateAuthorities: "/usr/share/kibana/config/certs/ca/ca.crt"
+
+# This is the certificate used by the kibana webserver (client <-> kibana) 
+#server.ssl.certificate: $KBN_PATH_CONF/kibana-server.crt
+#server.ssl.key: $KBN_PATH_CONF/kibana-server.key
+
+#$KBN_PATH_CONF contains the path for the Kibana configuration files. 
+#If you installed Kibana using archive distributions (zip or tar.gz), the path defaults to $KBN_HOME/config. If you used package distributions (Debian or RPM), the path defaults to /etc/kibana.
+
+# Enable incoming https (client<->kibana)
+#server.ssl.enabled: true
