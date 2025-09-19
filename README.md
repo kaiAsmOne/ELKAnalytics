@@ -114,3 +114,39 @@ docker run -d \
 curl -u elastic:<YOUR_PW> "localhost:9200/_cluster/health"  
  ```
 
+
+## 3: Configure Kibana
+
+In order to configure Kibana to talk with Elasticsearch we have to start with authentication.  
+In the previous section we configured and started elasticsearch. Elasticsearch has a builtin user for Kibana.
+
+Fetch a token / key for the kibana user
+
+```
+curl -X POST "localhost:9200/_security/service/elastic/kibana/credential/token/my-kibana-token" \
+  -H "Content-Type: application/json" \
+  -u elastic:<YOUR_PW>
+```
+  
+You will get an output similar to this:  
+  {"created":true,"token":{"name":"my-kibana-token","value":"<YOURTOKEN>"}}% 
+  
+ 
+Edit the kibana.yml Configuration file located in the $ELK$/kibana/ folder.  
+Modify the parameter elasticsearch.serviceAccountToken to include the token returned above.  
+
+Start Kibana
+
+```
+docker run -d \
+  --name kibana \
+  --net elastic \
+  -p 5601:5601 \
+  -v $ELK$/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml \
+  -e "ELASTICSEARCH_HOSTS=http://elasticsearch:9200" \
+  docker.elastic.co/kibana/kibana:9.1.3
+```
+
+Verify Kibana in a browser connecting to <http://localhost:5601/> and connect with user elastic and the password you set for elasticsearch earlier.
+
+
