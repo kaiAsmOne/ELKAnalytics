@@ -83,3 +83,9 @@ Note down the password and try to query Elastic Search using the password.
 ```
 curl -u elastic:<YOUR_PW> "localhost:9200/_cluster/health"
 ```
+
+Expect an output similar to this
+```
+{"cluster_name":"docker-cluster","status":"green","timed_out":false,"number_of_nodes":1,"number_of_data_nodes":1,"active_primary_shards":70,"active_shards":70,"relocating_shards":0,"initializing_shards":0,"unassigned_shards":11,"unassigned_primary_shards":0,"delayed_unassigned_shards":0,"number_of_pending_tasks":0,"number_of_in_flight_fetch":0,"task_max_waiting_in_queue_millis":0,"active_shards_percent_as_number":86.41975308641975}%
+```  
+
