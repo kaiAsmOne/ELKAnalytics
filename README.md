@@ -11,7 +11,7 @@ Gaining this information has proven valuable insights on how devices share our p
 I wrote about this topic on my website <https://www.thorsrud.io/breaking-down-information-silos-building-a-home-network-intelligence-platform/>
 
   
-I have worked with IT Security as a professional for 26 years, working for both private and public customers bulding global services for several fortune 500 companies.  
+I have worked with IT Security as a professional for 26 years, working for both private and public customers building global services for several fortune 500 companies.  
 What drives me today and has always driven me is curiosity: What if, How come.. 
   
 I will share configuration on how to get insights into  
@@ -24,7 +24,7 @@ I will also share how i enrich this data with
 - Geo Location Information   
 - Threat information (From virus total and other services)  
   
-Giving you the abillity to discover if your internet connected washing machine is part of a DDOS network or a surveilance device  
+Giving you the abillity to discover if your internet connected washing machine is part of a DDOS network or a surveilance device  (Such devices are perfect sleepers for professionals)  
   
 
 **Requirements**    
