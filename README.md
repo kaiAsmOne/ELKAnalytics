@@ -88,7 +88,7 @@ docker run -d \
 ```
  
 Create a backup folder  
-mkdir $ELKH/elasticbackup/  
+mkdir $ELK$/elasticbackup/  
   
 Restart Elasticsearch with password  
 Run Elasticsearch with 1GB Ram ( "ES_JAVA_OPTS=-Xms1g -Xmx1g" )  
