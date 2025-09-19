@@ -4,7 +4,7 @@
 
 This repository contains information and configuration for building your own home network Analytics platform.  
 Analytics that can run 24/7 without requiring much disk space or processing power.  
-Usually we only ad-Hoc / spot check logs or connections, missing out on equipment that "calls home" once every 4/8/48 Hours.  
+Usually we only ad-Hoc / spot check logs or connections,  missing out on equipment that "calls home" once every 4/8/48 Hours.  
 Gaining this information has proven valuable.  
   
 I will share configuration on how to get insights into  
@@ -34,7 +34,7 @@ Create a folder for this project or git clone this repo. (I will refer to this f
 For the setup to survive upgrades / deletion of the containers i mount different subfolders in $ELK$ directory to store config files and the Indices. 
 
 
-start by creating a network for the analysis platform    
+Start by creating a network for the analysis platform    
 ```
 docker network create elastic  
 ```
