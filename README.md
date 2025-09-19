@@ -10,8 +10,12 @@ showing what your TV does on the internet when you sleep.
   
 
 Or showing where in the world the people your kids talk to on Discord are actually located.  
+
+I will also share how i enrich the data with  
   
-I will also share how i enrich the data with threat information from virus total  
+**Geo Location Information** 
+**Threat information** (From virus total and other services)  
+   
 Giving you the abillity to discover if your internet connected washing machine is part of a DDOS network or a surveilance device  
   
 
