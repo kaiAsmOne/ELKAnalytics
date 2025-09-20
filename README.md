@@ -40,7 +40,8 @@ I run Asuswrt-Merlin on my Internet gateway.
 If you know docker and containers reading walls of text is frustrating  
 you can git clone this repo & sudo chmod +x setup.sh  
 Then execute the script to have it all setup for you in one go  
-(It will delete any existing containers called elasticsearch , kibana and logstash. I assume you run on mac using #!/bin/zsh)
+(It will delete any existing containers called elasticsearch , kibana and logstash. I assume you run on mac using #!/bin/zsh)  
+When the setup has completed jump to Section 5 in this file
   
 
 **Basesetup:** 
@@ -196,6 +197,10 @@ Start logstash
 ## 5: Making this work for your environment  
   
 Login to your router and enable connection logging.  
+After connection logging is enabled configure a syslog server.  
+Enter the IP Address of the host running docker containers and specify 5140 as the port number.  
+
+
 By default my router only logs inbound connections using GUI.  
 The most interesting part is to log outbound traffic from your devices.  
 To achieve this on WRT based routers, enable ssh on the LAN interface and SSH into the router using your admin username  
@@ -205,3 +210,68 @@ Enable outbound logging using iptables
 ``` 
 iptables -I FORWARD -m state --state NEW -j LOG --log-prefix "OUT_CONN " --log-level 6
 ``` 
+
+Verify that logstash is able to process syslog messages with my Grok Filter that is made to match OpenWRT / Asuswrt-Merlin.  
+``` 
+docker logs -f logstash
+```   
+Logstash will output to console all the messages it is able to interpet.  
+
+### 6: I am not getting logdata
+
+If your syslog messages does not conform to my syslog messages you will need to modify the rule.  
+Kibana includes a Grok Debugger.  
+Log into kibana and Select DevTools or use this provided link <http://localhost:5601/app/dev_tools#/grokdebugger>  
+
+My logstash.conf provides examples of two syslog messages i process.  
+``` 
+# This Grok Filter is made to match two different syslog message pattern:
+
+# 1 for traffic initiated from public internet attemting to enter my network / connect to my public ip. (Message Priority 12)
+
+<12>Sep 19 13:15:55 mephisto-D167CB1-C kernel: DROP IN=eth0 OUT= MAC=04:42:1a:cd:5a:00:40:b4:f0:e0:5e:af:08:00 SRC=165.154.49.137 DST=139.48.125.218 LEN=44 TOS=0x00 PREC=0x00 TTL=44 ID=0 DF PROTO=TCP SPT=47436 DPT=9704 SEQ=1226283879 ACK=0 WINDOW=1024 RES=0x00 SYN URGP=0 OPT (02040584) MARK=0x8000000 
+
+# 1 for traffic initiated from my LAN accessing services on the internet. (Message Priority 14)
+
+<14>Sep 19 13:13:16 mephisto-D167CB1-C kernel: OUT_CONN IN=br0 OUT=eth0 MAC=04:42:1a:cd:5a:00:ae:39:1a:67:9e:8f:08:00 SRC=192.168.50.6 DST=17.148.146.49 LEN=1228 TOS=0x02 PREC=0x00 TTL=63 ID=0 DF PROTO=UDP SPT=58473 DPT=443 LEN=1208 
+``` 
+You can use the two messages to learn how the Grok Debugger / logstash processes my syslog data
+Paste in one of the two messages into the sample data field.  
+Paste in the grok filter below in the grok pattern field 
+``` 
+<%{POSINT:priority}>%{SYSLOGTIMESTAMP:timestamp} %{DATA:hostname} %{DATA:program}: %{DATA:action} IN=%{DATA:in_interface} OUT=(?<out_interface>\S*) MAC=(?<mac>\S*) SRC=%{IP:src_ip} DST=%{IP:dst_ip} LEN=%{INT:length} TOS=%{BASE16NUM:tos} PREC=%{BASE16NUM:prec} TTL=%{INT:ttl} ID=%{INT:id}(?: %{WORD:ip_flags})? PROTO=%{WORD:protocol}(?: SPT=%{INT:src_port} DPT=%{INT:dst_port})?(?: LEN=%{INT:udp_length})?(?: SEQ=%{INT:sequence} ACK=%{INT:ack} WINDOW=%{INT:window} RES=%{BASE16NUM:res} %{DATA:tcp_flags} URGP=%{INT:urgp})?(?: MARK=%{DATA:mark})?
+``` 
+
+In the bottom of the screen you will get the now structured data.  
+Including parsing of message with pri 12  
+
+```
+{
+  "in_interface": "eth0",
+  "ack": "0",
+  "program": "kernel",
+  "mac": "04:42:1a:cd:5a:00:40:b4:f0:e0:5e:af:08:00",
+  "dst_ip": "139.48.125.218",
+  "src_ip": "165.154.49.137",
+  "hostname": "mephisto-D167CB1-C",
+  "protocol": "TCP",
+  "prec": "0x00",
+  "tcp_flags": "SYN",
+  "action": "DROP",
+  "tos": "0x00",
+  "id": "0",
+  "timestamp": "Sep 19 13:15:55",
+  "out_interface": "",
+  "res": "0x00",
+  "length": "44",
+  "priority": "12",
+  "ttl": "44",
+  "ip_flags": "DF",
+  "src_port": "47436",
+  "urgp": "0",
+  "sequence": "1226283879",
+  "dst_port": "9704",
+  "window": "1024"
+}
+```
+  
