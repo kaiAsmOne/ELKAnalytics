@@ -83,8 +83,7 @@ Give it some time to boot up before we reset the admin password.
   
 Reset Password using
 ```
-docker run -d \
--docker exec -it elasticsearch bin/elasticsearch-reset-password -u elastic --interactive 
+docker exec -ti elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic --interactive
 ```
  
 Create a backup folder  
@@ -118,7 +117,8 @@ curl -u elastic:<YOUR_PW> "localhost:9200/_cluster/health"
 ## 3: Configure Kibana
 
 In order to configure Kibana to talk with Elasticsearch we have to start with authentication.  
-In the previous section we configured and started elasticsearch. Elasticsearch has a builtin user for Kibana.
+In the previous section we configured and started elasticsearch.  
+Elasticsearch has a builtin user for Kibana and we will use the associated token key for Auth.  
 
 Fetch a token / key for the kibana user
 
@@ -147,6 +147,51 @@ docker run -d \
   docker.elastic.co/kibana/kibana:9.1.3
 ```
 
-Verify Kibana in a browser connecting to <http://localhost:5601/> and connect with user elastic and the password you set for elasticsearch earlier.
+Verify Kibana in a browser connecting to <http://localhost:5601/> and connect with user elastic and the password you set for elasticsearch earlier.  
+If you run into issues with any containers you can inspect the logs sent to console.  
+```
+docker logs <containername>  
+or continus output logs using the -f for follow
+Logging will continue to output until you press ctrl+c
+docker logs -f <containername> 
+```
+  
+## 4: Configure Logstash
 
+For logstash to function properly we will have to use username / password when communicating to elasticsearch. 
+The api_key parameter only works when elasticsearch runs https://
 
+Reset Password using
+```
+docker exec -ti elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u logstash_system --interactive
+```
+  
+
+open the $ELK$/logstash/pipeline/logstash.conf file in a texteditor  
+Go to line 148,165 and 230. Change the password parameter to your password for the logstash_system user  
+
+Start logstash  
+```  
+  --name logstash \
+  --net elastic \
+  -p 5044:5044 \
+  -p 9600:9600 \
+  -v "$ELK$/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml" \
+  -v "$ELK$/logstash/pipeline:/usr/share/logstash/pipeline" \
+  -e "LS_JAVA_OPTS=-Xmx1g -Xms1g" \
+  docker.elastic.co/logstash/logstash:9.1.3
+
+```
+
+## 5: Making this work for your environment  
+  
+Login to your router and enable connection logging.  
+By default my router only logs inbound connections using GUI.  
+The most interesting part is to log outbound traffic from your devices.  
+To achieve this on WRT based routers, enable ssh on the LAN interface and SSH into the router using your admin username  
+
+Enable outbound logging using iptables
+
+``` 
+iptables -I FORWARD -m state --state NEW -j LOG --log-prefix "OUT_CONN " --log-level 6
+``` 
