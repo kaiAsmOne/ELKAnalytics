@@ -225,13 +225,7 @@ Log into kibana and Select DevTools or use this provided link <http://localhost:
 
 My logstash.conf provides examples of two syslog messages i process.  
 ``` 
-# This Grok Filter is made to match two different syslog message pattern:
-
-# 1 for traffic initiated from public internet attemting to enter my network / connect to my public ip. (Message Priority 12)
-
 <12>Sep 19 13:15:55 mephisto-D167CB1-C kernel: DROP IN=eth0 OUT= MAC=04:42:1a:cd:5a:00:40:b4:f0:e0:5e:af:08:00 SRC=165.154.49.137 DST=139.48.125.218 LEN=44 TOS=0x00 PREC=0x00 TTL=44 ID=0 DF PROTO=TCP SPT=47436 DPT=9704 SEQ=1226283879 ACK=0 WINDOW=1024 RES=0x00 SYN URGP=0 OPT (02040584) MARK=0x8000000 
-
-# 1 for traffic initiated from my LAN accessing services on the internet. (Message Priority 14)
 
 <14>Sep 19 13:13:16 mephisto-D167CB1-C kernel: OUT_CONN IN=br0 OUT=eth0 MAC=04:42:1a:cd:5a:00:ae:39:1a:67:9e:8f:08:00 SRC=192.168.50.6 DST=17.148.146.49 LEN=1228 TOS=0x02 PREC=0x00 TTL=63 ID=0 DF PROTO=UDP SPT=58473 DPT=443 LEN=1208 
 ``` 
