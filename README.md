@@ -103,7 +103,7 @@ Run Elasticsearch with 1GB Ram ( "ES_JAVA_OPTS=-Xms1g -Xmx1g" )
 ```
 docker stop elasticsearch
 docker rm elasticsearch
-
+# Remember to replace %ELK% with the correct Path
 docker run -d \
   --name elasticsearch \
   --net elastic \
@@ -149,6 +149,7 @@ elasticsearch.serviceAccountToken: "<INSERT_YOUR_TOKEN>"
 Start Kibana
 
 ```
+# Remember to replace %ELK% with the correct Path
 docker run -d \
   --name kibana \
   --net elastic \
@@ -183,6 +184,7 @@ Go to line 148,165 and 230. Change the password parameter to your password for t
 
 Start logstash  
 ```  
+# Remember to replace %ELK% with the correct Path
   --name logstash \
   --net elastic \
   -p 5044:5044 \
