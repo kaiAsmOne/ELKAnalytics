@@ -36,6 +36,12 @@ My configuration assumes your internet gateway is capable of connection logging 
 I run Asuswrt-Merlin on my Internet gateway.      
 
 
+**TL/DR**  
+If you know docker and containers reading walls of text is frustrating  
+you can git clone this repo & sudo chmod +x setup.sh  
+Then execute the script to have it all setup for you in one go  (It will delete any existing containers called elasticsearch , kibana and logstash)
+  
+  
 **Basesetup:** 
 Create a folder for this project or git clone this repo. (I will refer to this folder as $ELK$/)
 For the setup to survive upgrades / deletion of the containers i mount different subfolders in $ELK$ directory to store config files and the Indices. 
@@ -133,7 +139,10 @@ You will get an output similar to this:
   
  
 Edit the kibana.yml Configuration file located in the $ELK$/kibana/ folder.  
-Modify the parameter elasticsearch.serviceAccountToken to include the token returned above.  
+Add the followint to the kibana.yml  
+```
+elasticsearch.serviceAccountToken: "<INSERT_YOUR_TOKEN>"
+``` 
 
 Start Kibana
 
@@ -175,10 +184,10 @@ Start logstash
   --name logstash \
   --net elastic \
   -p 5044:5044 \
+  -p 5140:5140/udp \
   -p 9600:9600 \
   -v "$ELK$/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml" \
   -v "$ELK$/logstash/pipeline:/usr/share/logstash/pipeline" \
-  -e "LS_JAVA_OPTS=-Xmx1g -Xms1g" \
   docker.elastic.co/logstash/logstash:9.1.3
 
 ```
