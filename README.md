@@ -57,7 +57,7 @@ The logstash collector is also responsible for enriching the data with Geo IP In
 **kibana/**  
 - Contains configuration files for Kibana. 
 
-**elasticsearch-data/*  
+**elasticsearch-data/**
 - Contains the Indices and Indexes. 
 
 
