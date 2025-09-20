@@ -36,12 +36,13 @@ My configuration assumes your internet gateway is capable of connection logging 
 I run Asuswrt-Merlin on my Internet gateway.      
 
 
-**TL/DR**  
+**TL/DR:**  
 If you know docker and containers reading walls of text is frustrating  
 you can git clone this repo & sudo chmod +x setup.sh  
-Then execute the script to have it all setup for you in one go  (It will delete any existing containers called elasticsearch , kibana and logstash)
+Then execute the script to have it all setup for you in one go  
+(It will delete any existing containers called elasticsearch , kibana and logstash. I assume you run on mac using #!/bin/zsh)
   
-  
+
 **Basesetup:** 
 Create a folder for this project or git clone this repo. (I will refer to this folder as $ELK$/)
 For the setup to survive upgrades / deletion of the containers i mount different subfolders in $ELK$ directory to store config files and the Indices. 
