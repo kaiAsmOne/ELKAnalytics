@@ -233,6 +233,17 @@ My logstash.conf provides examples of two syslog messages i process.
 ``` 
 You can use the two messages to learn how the Grok Debugger / logstash processes my syslog data
 Paste in one of the two messages into the sample data field.  
+  
+I use two filters. One for discarding irrelevant messages. Make sure your syslog entry passes both filters. 
+
+Initial validation:
+Paste in the grok filter below in the grok pattern field 
+``` 
+<%{POSINT:priority}>%{SYSLOGTIMESTAMP:timestamp} %{DATA:hostname} %{DATA:program}:
+``` 
+
+Then you need to make sure your syslog message works with the more complex filter  
+
 Paste in the grok filter below in the grok pattern field 
 ``` 
 <%{POSINT:priority}>%{SYSLOGTIMESTAMP:timestamp} %{DATA:hostname} %{DATA:program}: %{DATA:action} IN=%{DATA:in_interface} OUT=(?<out_interface>\S*) MAC=(?<mac>\S*) SRC=%{IP:src_ip} DST=%{IP:dst_ip} LEN=%{INT:length} TOS=%{BASE16NUM:tos} PREC=%{BASE16NUM:prec} TTL=%{INT:ttl} ID=%{INT:id}(?: %{WORD:ip_flags})? PROTO=%{WORD:protocol}(?: SPT=%{INT:src_port} DPT=%{INT:dst_port})?(?: LEN=%{INT:udp_length})?(?: SEQ=%{INT:sequence} ACK=%{INT:ack} WINDOW=%{INT:window} RES=%{BASE16NUM:res} %{DATA:tcp_flags} URGP=%{INT:urgp})?(?: MARK=%{DATA:mark})?
@@ -271,3 +282,18 @@ Including parsing of message with pri 12
 }
 ```
   
+In order to make your modified filter work you will have to obtain a complete syslog message from your Router / Firewall / Internet device.  
+Either try and fetch a complete message from your devices admin interface. If this fails the way i always do it is by packet capture with wireshark.  
+Please know that since we are sending syslog data to an alternative port, 5140, not the normal 514 port you need to tell wireshark it can expect syslog data on port 5140. 
+  
+Start Wireshark, Select Preferences from the Menu.  
+Select Protocols, scroll down to syslog (or better just type syslog and it will take you there).  
+Modify Syslog UDP Port so that it contains "514,5140"  
+
+Select the correct interface where syslog messages are recieved, in my setup that is en0: and use the filter port 5140 .  
+The filter will ensure only syslog messages on port 5140 are recieved. When you get data in the wireshark window it means a syslog message is captured.  
+Stop the Packet Capture , Right click an entry of the captured data and select Follow / UPD Stream.  
+Copy a syslog message to your desired text editor. Compare it to one of my example messages giving you an idea of where one message starts and ends.  
+  
+
+Play with Grok debugger until you get a match for your message. 
