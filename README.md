@@ -108,8 +108,8 @@ docker run -d \
   --name elasticsearch \
   --net elastic \
   -p 9200:9200 -p 9300:9300 \
-  -v "<Insert your %ELK% Path>/elasticsearch-data:/usr/share/elasticsearch/data" \
-  -v "<Insert your %ELK% Path>/elasticbackup:/usr/share/elasticsearch/backup" \
+  -v "%ELK%/elasticsearch-data:/usr/share/elasticsearch/data" \
+  -v "%ELK%/elasticbackup:/usr/share/elasticsearch/backup" \
   -e "discovery.type=single-node" \
   -e "xpack.security.enabled=true" \
   -e "ELASTIC_PASSWORD=<YOUR_PW>" \
