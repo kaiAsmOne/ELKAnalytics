@@ -1,6 +1,6 @@
 # Home Security Analytics Platform
 
-## Table of Contents
+##### Table of Contents 
 
 - [About This Project](#about-this-project)
 - [Requirements](#requirements)
@@ -14,8 +14,6 @@
 - [6. I am not getting logdata](#6-i-am-not-getting-logdata)
 
 ---
-
-**About This Project**
 
 **About This Project**  
 
