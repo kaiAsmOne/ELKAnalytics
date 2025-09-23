@@ -292,7 +292,7 @@ Start Wireshark, Select Preferences from the Menu.
 Select Protocols, scroll down to syslog (or better just type syslog and it will take you there).  
 Modify Syslog UDP Port so that it contains "514,5140"  
 
-Select the correct interface where syslog messages are recieved, in my setup that is en0: and in the filter field tyoe "port 5140" without the hyphens.  
+Select the correct interface where syslog messages are recieved, in my setup that is en0: and in the filter field type "port 5140" without the hyphens.  
 The filter will ensure only syslog messages on port 5140 are recieved. When you get data in the wireshark window it means a syslog message is captured.  
 Stop the Packet Capture , Right click an entry of the captured data and select Follow / UPD Stream.  
 Copy a syslog message to your desired text editor. Compare it to one of my example messages giving you an idea of where one message starts and ends.  
