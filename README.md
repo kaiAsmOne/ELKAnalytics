@@ -1,11 +1,6 @@
 # Home Security Analytics Platform
 
 ##### Table of Contents 
-
-- [About This Project](#about-this-project)
-- [Requirements](#requirements)
-- [Quick Setup (TL/DR)](#tldr)
-- [Base Setup](#basesetup)
 - [1. Folders in this repo](#1-folders-in-this-repo)
 - [2. Prepare Elasticsearch](#2-prepare-elasticsearch)
 - [3. Configure Kibana](#3-configure-kibana)
