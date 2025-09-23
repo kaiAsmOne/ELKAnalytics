@@ -217,7 +217,8 @@ Verify that logstash is able to process syslog messages with my Grok Filter that
 ``` 
 docker logs -f logstash
 ```   
-Logstash will output to console all the messages it is able to interpet.  
+Logstash will output to console all the messages it is able to interpet.   
+If you see messages getting written to the console log you can skip the next chapter.   
 
 ### 6: I am not getting logdata
 
@@ -283,8 +284,9 @@ Including parsing of message with pri 12
 ```
   
 In order to make your modified filter work you will have to obtain a complete syslog message from your Router / Firewall / Internet device.  
-Either try and fetch a complete message from your devices admin interface. If this fails the way i always do it is by packet capture with wireshark.  
-Please know that since we are sending syslog data to an alternative port, 5140, not the normal 514 port you need to tell wireshark it can expect syslog data on port 5140. 
+Try and fetch a complete message from your devices admin interface.  
+If this fails, the best way to ensure you get the entire message, as sent to logstash use wireshark and perform a network capture.    
+Since we are sending syslog data to an alternative port, 5140, not the normal 514 port you need to tell wireshark it can expect syslog data on port 5140. 
   
 Start Wireshark, Select Preferences from the Menu.  
 Select Protocols, scroll down to syslog (or better just type syslog and it will take you there).  
