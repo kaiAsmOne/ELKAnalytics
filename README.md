@@ -1,5 +1,24 @@
 # Home Security Analytics Platform
 
+# Home Security Analytics Platform
+
+## Table of Contents
+
+- [About This Project](#about-this-project)
+- [Requirements](#requirements)
+- [Quick Setup (TL/DR)](#tldr)
+- [Base Setup](#basesetup)
+- [1. Folders in this repo](#1-folders-in-this-repo)
+- [2. Prepare Elasticsearch](#2-prepare-elasticsearch)
+- [3. Configure Kibana](#3-configure-kibana)
+- [4. Configure Logstash](#4-configure-logstash)
+- [5. Making this work for your environment](#5-making-this-work-for-your-environment)
+- [6. I am not getting logdata](#6-i-am-not-getting-logdata)
+
+---
+
+**About This Project**
+
 **About This Project**  
 
 This repository contains information and configuration for building your own home network Analytics platform.  
