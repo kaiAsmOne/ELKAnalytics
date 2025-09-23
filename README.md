@@ -1,7 +1,5 @@
 # Home Security Analytics Platform
 
-# Home Security Analytics Platform
-
 ## Table of Contents
 
 - [About This Project](#about-this-project)
