@@ -330,7 +330,7 @@ display_final_info() {
     echo "  Password: ${ELASTIC_PASSWORD}"
     echo
     echo -e "${YELLOW}Next Steps:${NC}"
-    echo "1. Configure your router to send syslog data to this server on port 5044"
+    echo "1. Configure your router / Firewall / Internet Gateway to send syslog data to this server on port 5140"
     echo "2. Customize the Logstash configuration in ${ELK_PATH}/logstash/pipeline/logstash.conf"
     echo "3. Set up iptables logging on your router if required for outbound logging:"
     echo "   iptables -I FORWARD -m state --state NEW -j LOG --log-prefix \"OUT_CONN \" --log-level 6"
