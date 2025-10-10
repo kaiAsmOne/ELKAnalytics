@@ -113,10 +113,10 @@ docker run -d \
  ```
 
 Docker will download elasticsearch and start up an instance of Elasticsearch in a container named elasticsearch running on network elastic  
-Give it some time to boot up.  
+Give it some time to boot or check the running state using curl
  ```
 
-### Verify Cluster Health to make sure it is running before proceeding or just give it some time to boot
+### Verify Cluster Health 
 curl -u elastic:<YOUR_PW> "localhost:9200/_cluster/health"  
  ```
 
