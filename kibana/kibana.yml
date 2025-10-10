@@ -3,7 +3,6 @@ server.host: "0.0.0.0"
 server.port: 5601
 server.shutdownTimeout: "5s"
 elasticsearch.hosts: [ "http://elasticsearch:9200" ]
-elasticsearch.serviceAccountToken: "<INSERT_YOUR_TOKEN>"
 monitoring.ui.container.elasticsearch.enabled: true
 # Reading doc manually 
 # Assume this is for the trust part of kibana connecting to elastic search
