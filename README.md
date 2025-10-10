@@ -81,39 +81,29 @@ The logstash collector is also responsible for enriching the data with Geo IP In
 
 
 ## 2: Prepare Elasticsearch  
-  
+
+Create a network for our ELK environment.  
+
+```
+
+docker network create elastic
+```
+
 Start a terminal window and go to the %ELK%/ folder.  
-We will start elasticsearch just to be able to set a password on the systemuser elastic.  
-
-```
-docker run -d \
-  --name elasticsearch \
-  --net elastic \
-  -p 9200:9200 -p 9300:9300 \
-  -e "discovery.type=single-node" \
-  -e "xpack.security.enabled=true" \
-  -e "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
-  docker.elastic.co/elasticsearch/elasticsearch:9.1.3
-```
-  
-Docker will download elasticsearch and start up an instance of Elasticsearch in a container named elasticsearch running on network elastic  
-Give it some time to boot up before we reset the admin password.  
-  
-Reset Password using
-```
-docker exec -ti elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic --interactive
-```
- 
 Create a backup folder  
-mkdir %ELK%/elasticbackup/  
-  
-Restart Elasticsearch with password  
-Run Elasticsearch with 1GB Ram ( "ES_JAVA_OPTS=-Xms1g -Xmx1g" )  
 
 ```
-docker stop elasticsearch
-docker rm elasticsearch
-# Remember to replace %ELK% with the correct Path
+
+mkdir %ELK%/elasticbackup/  
+```
+  
+Start elasticsearch using docker.   
+Remember to modify the paths to match your own system, modifying %ELK% to match your local env  
+Set a password for elasticsearch modifying the ELASTIC_PASSWORD.  
+
+```
+# Remember to replace %ELK% with the correct Path  
+# Remember to set a password  
 docker run -d \
   --name elasticsearch \
   --net elastic \
@@ -125,9 +115,15 @@ docker run -d \
   -e "ELASTIC_PASSWORD=<YOUR_PW>" \
   -e "path.repo=/usr/share/elasticsearch/backup" \
   -e "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
-  docker.elastic.co/elasticsearch/elasticsearch:9.1.3
-  
-### Verify Cluster Health with auth
+  docker.elastic.co/elasticsearch/elasticsearch:9.1.3  
+
+ ```
+
+Docker will download elasticsearch and start up an instance of Elasticsearch in a container named elasticsearch running on network elastic  
+Give it some time to boot up.  
+ ```
+
+### Verify Cluster Health to make sure it is running before proceeding or just give it some time to boot
 curl -u elastic:<YOUR_PW> "localhost:9200/_cluster/health"  
  ```
 
