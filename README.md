@@ -82,13 +82,6 @@ The logstash collector is also responsible for enriching the data with Geo IP In
 
 ## 2: Prepare Elasticsearch  
 
-Create a network for our ELK environment.  
-
-```
-
-docker network create elastic
-```
-
 Start a terminal window and go to the %ELK%/ folder.  
 Create a backup folder  
 
