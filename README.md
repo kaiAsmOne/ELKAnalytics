@@ -20,10 +20,7 @@ Gaining this information has proven valuable insights on how devices share our p
   
 I wrote about this topic on my website <https://www.thorsrud.io/breaking-down-information-silos-building-a-home-network-intelligence-platform/>
 
-  
-I have worked with IT Security as a professional for 26 years, working for both private and public customers building global services for several fortune 500 companies.  
-What drives me today and has always driven me is curiosity: What if, How come.. 
-  
+    
 I will share configuration on how to get insights into  
  - What your TV does on the internet when you use it and when you sleep.  
  - Where in the world does your Phillips Hue Bridge make clear text http requests.  
@@ -170,16 +167,12 @@ docker logs -f <containername>
 ## 4: Configure Logstash
 
 For logstash to function properly we will have to use username / password when communicating to elasticsearch. 
-The api_key parameter only works when elasticsearch runs https://
-
-Reset Password using
-```
-docker exec -ti elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u logstash_system --interactive
-```
+The api_key parameter only works when elasticsearch runs https://  
+To keep the lab simple we will use the root user elastic with the password you set earlier.  
   
 
 open the %ELK%/logstash/pipeline/logstash.conf file in a texteditor  
-Go to line 148,165 and 230. Change the password parameter to your password for the logstash_system user  
+Go to line 148,165 and 230. Change the password parameter to your password for the elastic user  
 
 Start logstash  
 ```  
