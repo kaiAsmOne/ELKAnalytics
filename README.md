@@ -24,7 +24,7 @@ I wrote about this topic on my website <https://www.thorsrud.io/breaking-down-in
 I will share configuration on how to get insights into  
  - What your TV does on the internet when you use it and when you sleep.  
  - Where in the world does your Phillips Hue Bridge make clear text http requests.  
- - Sharing precise location data with your kids on the people they talk to using Discord.  
+ - Sharing precise location data with your kids on the people they talk to using Discord.  (I talked with my kid aboit this prior , during and ending logging)
 
 I will also share how i enrich this data with  
   
