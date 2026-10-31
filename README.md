@@ -37,7 +37,7 @@ Giving you the abillity to discover if your internet connected washing machine i
 **Requirements**    
 This project runs on containers.    
 You will have to install docker or a compatible alternative on your machine in order to replicate this setup.  
-My busy environment typically generate 40 - 80 Mbyte of logdata pr day for 100% visibillity.  
+My busy environment typically generate 40 - 80 Mbyte of logdata pr day for 100% visibillity (on L2-L4).  
 My configuration assumes your internet gateway is capable of connection logging to syslog.  (Most routers do support this)  
   
 I run Asuswrt-Merlin on my Internet gateway.      
